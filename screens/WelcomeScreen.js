@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ImageBackground, Dimensions } from 'react-native';
+import { Input } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
-
 
 // screen dimensions
 const width = Dimensions.get('window').width;
@@ -38,34 +38,66 @@ function WelcomeScreen() {
             {/* Login Page */}
             {showLogin && (
                 <View style={styles.viewContent}>
-                    <Text style={styles.welcomeText}>Log in</Text>
+                    <Text style={{...styles.welcomeText, marginBottom: 10}}>Log in</Text>
                     <TextInput style={styles.input} placeholder="Username" placeholderTextColor="#FFFFFF80" />
                     <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#FFFFFF80" />
+                    <TouchableOpacity onPress={() => { setShowLogin(false); setShowSignup(true); }} 
+                    style={{marginRight: 'auto', marginLeft: 'auto', marginTop: 10}}>
+                        <Text style={{ color: '#222' }}>Don't have an account? Signup</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={() => {}}>
-                        <Text style={{ color: 'white', fontSize: 18}}>Login</Text>
+                        <Text style={{ color: 'white', fontSize: 18, fontWeight: 600}}>Login</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { setShowLogin(false); setShowSignup(true); }}>
-                        <Text style={{ color: '#222' }}>Don't have an account? Signup here.</Text>
-                    </TouchableOpacity>
+                    
                 </View>
             )}
 
             {/* Signup Page */}
             {showSignup && (
                 <View style={styles.viewContent}>
-                    <TextInput style={styles.input} placeholder="Full Name" placeholderTextColor="#FFFFFF80" />
+                    <Text style={{fontSize: 30, fontWeight: 600, marginBottom: 7 }}>Create an account</Text>
+                    {/* <TextInput style={styles.input} placeholder="Full Name" placeholderTextColor="#FFFFFF80" />
                     <TextInput style={styles.input} placeholder="Email" placeholderTextColor="#FFFFFF80" />
-                    {/* <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#FFFFFF80" /> */}
-                    <View style={styles.inputContainer}>
-                        <TextInput style={styles.input} placeholder="Username" placeholderTextColor="#FFFFFF80" />
-                        <Ionicons name="user" size={24} color="#FFFFFF80" />
-                    </View>
+                    <TextInput style={styles.input} placeholder="Password" placeholderTextColor="#FFFFFF80" /> */}
+
+                    <Input
+                        placeholder='Username'
+                        rightIcon={{ type: 'ionicon', name: 'person-outline', color: 'white' }}
+                        // inputStyle={styles.inputStyle}
+                        inputStyle={{ color: '#FFFFFF80' }}
+                        // containerStyle={styles.inputContainer}
+                        inputContainerStyle={{...styles.input, margin: 0, padding: 0, borderBottomColor: 'transparent', marginLeft: -10 }}
+                    />
+
+                    <Input
+                    style={{borderWidth: 3, borderColor: 'red'}}
+                    containerStyle={{borderWidth: 3, borderColor: 'red', paddingBottom: 0, }}
+                    inputStyle={{borderWidth: 3, borderColor: 'red'}}
+                    // inputContainerStyle={{borderWidth: 10, borderColor: 'green'}}
+
+                        placeholder='Username'
+                        // rightIcon={{ type: 'ionicon', name: 'person-outline', color: 'white' }}
+                        // inputStyle={{ color: '#FFFFFF80' }}
+                        inputContainerStyle={{...styles.input, padding: 0, borderBottomColor: 'transparent', marginLeft: -10 }}
+                    />
+            
+
+                    <Input
+                        placeholder='Username'
+                        rightIcon={{ type: 'ionicon', name: 'person-outline', color: 'white' }}
+                        inputStyle={{ color: '#FFFFFF80' }}
+                        inputContainerStyle={{...styles.input, margin: 0, padding: 0, borderBottomColor: 'transparent', marginLeft: -10 }}
+                    />
+
+                    <TouchableOpacity onPress={() => { setShowSignup(false); setShowLogin(true); }}
+                    style={{ marginTop: 11, marginRight: 'auto', marginLeft: 'auto'}}>
+                        <Text style={{ color: '#222' }}>Have an account? Login</Text>
+                    </TouchableOpacity>
+
                     <TouchableOpacity style={styles.button} onPress={() => {}}>
-                        <Text style={{ color: 'white', fontSize: 18 }}>Create an account</Text>
+                        <Text style={{ color: 'white', fontSize: 18, fontWeight: 600 }}>Create</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { setShowSignup(false); setShowLogin(true); }}>
-                        <Text style={{ color: '#222' }}>Already have an account? Login here.</Text>
-                    </TouchableOpacity>
+                    
                 </View>
             )}
             </View>
@@ -76,10 +108,14 @@ function WelcomeScreen() {
 const styles = {
     viewContent: {
         width: width * 0.85,
-        borderWidth: 1,
+        borderWidth: 0.5,
         marginRight: 'auto',
         marginLeft: 'auto',
         // alignItems: 'center'
+        // display: 'flex',
+        // justifyContent: 'center',   
+        // alignItems: 'center',
+        // flexDirection: 'column',
     },
     
     button: {
@@ -92,7 +128,7 @@ const styles = {
         border: '1px solid rgba(255, 255, 255, 0.50)',
         backgroundColor: '#1C1C1E',
         boxShadow: '0px 5px 25px 0px rgba(0, 0, 0, 0.25)',
-        marginTop: 20,
+        marginTop: 15,
         marginRight: 'auto',
         marginLeft: 'auto',
         shadowColor: '#000',
@@ -100,42 +136,44 @@ const styles = {
         shadowOpacity: 0.25,
         shadowRadius: 25,
     },
-    // input: {
+    input: {
+        // display: 'flex',
+        height: 50,
+        // padding: 13,
+        // paddingLeft: 16,
+        // paddingRight: 16,
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
+        // alignSelf: 'stretch',
+        borderRadius: 20,
+        backgroundColor: '#1C1C1E',
+        // marginTop: 10,
+        // width: 320,
+        width: width * 0.85,
+        padding: 0,
+        fontSize: 17
+    },
+    // inputContainer: {
     //     display: 'flex',
-    //     height: 50,
-    //     padding: 13,
-    //     paddingLeft: 16,
-    //     paddingRight: 16,
-    //     justifyContent: 'space-between',
+    //     flexDirection: 'row',
     //     alignItems: 'center',
-    //     alignSelf: 'stretch',
     //     borderRadius: 20,
     //     backgroundColor: '#1C1C1E',
     //     marginTop: 10,
     //     width: 320,
-    //     fontSize: 17
-    // },
-    inputContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 20,
-        backgroundColor: '#1C1C1E',
-        marginTop: 10,
-        width: 320,
-      },
+    //   },
       
-      input: {
-        flex: 1,  // This ensures the TextInput takes up the available space
-        height: 50,
-        padding: 13,
-        paddingLeft: 16,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        alignSelf: 'stretch',
-        backgroundColor: 'transparent', // Make background transparent so the container's background is visible
-        color: 'white', // Set the text color
-      },
+    //   input: {
+    //     flex: 1,  // This ensures the TextInput takes up the available space
+    //     height: 50,
+    //     padding: 13,
+    //     paddingLeft: 16,
+    //     justifyContent: 'space-between',
+    //     alignItems: 'center',
+    //     alignSelf: 'stretch',
+    //     backgroundColor: 'transparent', // Make background transparent so the container's background is visible
+    //     color: 'white', // Set the text color
+    //   },
     welcomeText: {
         color: '#222',
         fontFamily: 'SF-Pro-Display',
@@ -148,7 +186,18 @@ const styles = {
         fontSize: 25,
         fontWeight: '500',
         marginBottom: 20,
-    }
+    },
+
+    inputStyle: {
+        color: 'white',
+      },
+      
+      inputContainer: {
+        borderRadius: 20,
+        backgroundColor: '#1C1C1',
+        // marginTop: 10,
+        width: 320,
+      }
 
 };
 
